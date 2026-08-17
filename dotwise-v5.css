@@ -1,0 +1,34 @@
+.boolean-lab { --ink: #111214; --line: rgba(17,18,20,.1); min-height: 100dvh; overflow: hidden; background: #fbfbfa; color: var(--ink); font-family: Inter, "Helvetica Neue", Arial, sans-serif; isolation: isolate; }
+.boolean-canvas { position: fixed; inset: 0; display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.boolean-canvas:active { cursor: grabbing; }
+.boolean-brand { position: fixed; z-index: 2; top: 27px; left: 30px; display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 650; letter-spacing: 0; pointer-events: none; }
+.boolean-brand small { margin-left: 8px; color: rgba(17,18,20,.42); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.boolean-mark { display: grid; grid-template-columns: repeat(2, 5px); gap: 3px; transform: rotate(-12deg); }
+.boolean-mark i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.boolean-panel { position: fixed; z-index: 3; top: 20px; right: 24px; bottom: 20px; width: min(330px, calc(100vw - 32px)); overflow: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(247,247,244,.96); box-shadow: 0 2px 3px rgba(0,0,0,.025), 0 18px 54px rgba(0,0,0,.06); scrollbar-width: none; }
+.boolean-panel::-webkit-scrollbar { display: none; }
+.boolean-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 18px 17px; }
+.boolean-panel-head p { margin: 0 0 4px; color: rgba(17,18,20,.48); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.boolean-panel-head h1 { margin: 0; font-size: 18px; font-weight: 620; letter-spacing: 0; }
+.boolean-play { width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(17,18,20,.065); color: var(--ink); cursor: pointer; font-size: 13px; font-weight: 700; transition: background-color 150ms ease-out, transform 150ms ease-out; }
+.boolean-play[data-active="true"] { background: var(--ink); color: #fff; }
+.boolean-play:active { transform: scale(.96); }
+.boolean-panel section { border-top: 1px solid var(--line); padding: 15px 14px 18px; }
+.boolean-section-label { display: flex; justify-content: space-between; padding: 0 4px 11px; color: rgba(17,18,20,.63); font-size: 12px; font-weight: 650; }
+.boolean-section-label span:last-child { font-variant-numeric: tabular-nums; }
+.boolean-scenes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.boolean-scenes button { min-height: 78px; padding: 11px; border: 1px solid transparent; border-radius: 10px; background: rgba(17,18,20,.045); color: rgba(17,18,20,.52); text-align: left; cursor: pointer; transition: background-color 150ms ease-out, color 150ms ease-out, transform 150ms ease-out; }
+.boolean-scenes button:last-child { grid-column: span 2; min-height: 58px; }
+.boolean-scenes button:hover { background: rgba(17,18,20,.075); color: var(--ink); }
+.boolean-scenes button:active { transform: scale(.98); }
+.boolean-scenes button[data-active="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.boolean-scenes b { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 620; }
+.boolean-scenes span { display: block; font-size: 10px; line-height: 1.4; }
+.boolean-range { position: relative; display: grid; grid-template-columns: 1fr 52px; align-items: center; height: 44px; margin-top: 7px; padding: 0 12px; overflow: hidden; border-radius: 10px; background: rgba(17,18,20,.045); cursor: ew-resize; }
+.boolean-range span { font-size: 13px; }
+.boolean-range output { color: rgba(17,18,20,.62); font-size: 13px; font-style: italic; font-variant-numeric: tabular-nums; text-align: right; }
+.boolean-range input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; }
+.boolean-panel footer { display: flex; justify-content: space-between; gap: 10px; padding: 15px 18px 19px; border-top: 1px solid var(--line); color: rgba(17,18,20,.47); font-size: 10px; }
+.boolean-panel footer strong { color: var(--ink); font-size: 11px; font-weight: 650; }
+@media (max-width: 720px) { .boolean-brand { top: 20px; left: 20px; } .boolean-brand small { display: none; } .boolean-panel { top: auto; right: 12px; bottom: 12px; left: 12px; width: auto; max-height: 56dvh; } .boolean-canvas { height: 46dvh; } }
+@media (prefers-reduced-motion: reduce) { .boolean-play, .boolean-scenes button { transition: none; } }

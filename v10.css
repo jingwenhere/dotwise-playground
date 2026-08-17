@@ -1,0 +1,399 @@
+.instrument-shell {
+  --ink: #171719;
+  --muted: #747478;
+  --line: rgba(23, 23, 25, 0.09);
+  --panel: rgba(247, 247, 248, 0.92);
+  --control: rgba(227, 227, 229, 0.64);
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  color: var(--ink);
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.instrument-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: none;
+  touch-action: none;
+}
+
+.instrument-brand {
+  position: absolute;
+  top: 28px;
+  left: 30px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+}
+
+.instrument-brand > span {
+  display: grid;
+  grid-template-columns: repeat(3, 4px);
+  gap: 3px;
+}
+
+.instrument-brand i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.instrument-hint {
+  position: absolute;
+  left: 31px;
+  bottom: 30px;
+  z-index: 2;
+  color: rgba(23, 23, 25, 0.48);
+  font-size: 12px;
+  letter-spacing: 0.015em;
+  pointer-events: none;
+}
+
+.instrument-shell[data-inverted="true"] .instrument-brand {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.instrument-shell[data-inverted="true"] .instrument-hint {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.instrument-transport {
+  position: absolute;
+  z-index: 4;
+  left: calc(50% - 230px);
+  bottom: 27px;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(24, 24, 26, 0.08);
+  border-radius: 15px;
+  background: rgba(247, 247, 248, 0.84);
+  box-shadow: 0 8px 30px rgba(20, 20, 25, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.instrument-transport button,
+.instrument-export button,
+.instrument-panel-header button,
+.instrument-show {
+  border: 0;
+  outline: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.instrument-transport button:focus-visible,
+.instrument-export button:focus-visible,
+.instrument-panel-header button:focus-visible,
+.instrument-show:focus-visible,
+.instrument-segmented button:focus-visible {
+  outline: 0;
+  box-shadow: inset 0 0 0 1px rgba(23, 23, 25, 0.16);
+}
+
+.instrument-transport button {
+  display: flex;
+  min-width: 74px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 11px;
+  color: #616164;
+  font-size: 12px;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.instrument-transport button:hover:not(:disabled),
+.instrument-transport button[data-active="true"] {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.instrument-transport button[data-active="true"] svg {
+  color: #ff466d;
+}
+
+.instrument-transport button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.instrument-panel {
+  position: absolute;
+  z-index: 5;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  width: min(390px, calc(100vw - 32px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgba(20, 20, 22, 0.08);
+  border-radius: 25px;
+  background: var(--panel);
+  box-shadow: 0 18px 60px rgba(25, 25, 30, 0.07);
+  backdrop-filter: blur(22px) saturate(1.08);
+  scrollbar-width: none;
+}
+
+.instrument-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.instrument-panel-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(247, 247, 248, 0.94);
+  backdrop-filter: blur(18px);
+}
+
+.instrument-panel-header h1 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.instrument-panel-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.instrument-panel-header > div:last-child {
+  display: flex;
+  gap: 5px;
+}
+
+.instrument-panel-header button,
+.instrument-show {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(228, 228, 230, 0.64);
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.instrument-panel-header button:hover,
+.instrument-show:hover {
+  background: rgba(216, 216, 219, 0.78);
+}
+
+.instrument-panel-header button:active,
+.instrument-show:active {
+  transform: scale(0.96);
+}
+
+.instrument-panel section {
+  padding: 20px 22px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.instrument-panel section > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  color: #5a5a5e;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.instrument-panel section > header em {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+.instrument-segmented {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+  margin-bottom: 9px;
+  padding: 3px;
+  border-radius: 13px;
+  background: var(--control);
+}
+
+.instrument-segmented button {
+  height: 37px;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  color: #77777b;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.instrument-segmented button[data-active="true"] {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.instrument-control {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  height: 48px;
+  align-items: center;
+  margin-top: 9px;
+  overflow: hidden;
+  border-radius: 13px;
+  background: rgba(229, 229, 231, 0.56);
+}
+
+.instrument-control > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 0;
+  background: rgba(199, 199, 202, 0.48);
+  pointer-events: none;
+}
+
+.instrument-control > span {
+  position: relative;
+  z-index: 1;
+  padding-left: 16px;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.instrument-control input[type="range"] {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.instrument-control input[type="number"] {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  width: 58px;
+  justify-self: end;
+  padding-right: 14px;
+  border: 0;
+  outline: 0;
+  color: #5f5f63;
+  background: transparent;
+  text-align: right;
+  font: italic 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.instrument-control input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.instrument-note {
+  margin: 13px 3px 0;
+  color: #858589;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.instrument-colors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.instrument-colors label {
+  display: flex;
+  height: 45px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9px 0 14px;
+  border-radius: 13px;
+  background: rgba(229, 229, 231, 0.56);
+  color: #646468;
+  font-size: 11px;
+}
+
+.instrument-colors input {
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.instrument-colors input::-webkit-color-swatch-wrapper { padding: 0; }
+.instrument-colors input::-webkit-color-swatch { border: 0; border-radius: 50%; }
+
+.instrument-export {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.instrument-export button {
+  display: flex;
+  height: 41px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 12px;
+  background: rgba(225, 225, 228, 0.64);
+  color: #525256;
+  font-size: 11px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.instrument-export button:hover {
+  background: rgba(212, 212, 216, 0.72);
+}
+
+.instrument-export button:active { transform: scale(0.98); }
+.instrument-export button[data-recording="true"] svg { color: #ff466d; }
+
+.instrument-show {
+  position: absolute;
+  z-index: 5;
+  top: 20px;
+  right: 20px;
+}
+
+@media (max-width: 760px) {
+  .instrument-panel { width: min(360px, calc(100vw - 24px)); top: 12px; right: 12px; bottom: 12px; }
+  .instrument-brand { top: 20px; left: 20px; }
+  .instrument-hint { display: none; }
+  .instrument-transport { left: 50%; bottom: 18px; transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .instrument-shell * { transition-duration: 0.01ms !important; }
+}

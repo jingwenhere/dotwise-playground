@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function Logo(){return <Link href="/" className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-.02em]"><span className="relative h-7 w-10 rounded-[5px] border border-ink/30 bg-tomato shadow-sm"><span className="absolute inset-x-1.5 bottom-1.5 h-2 rounded-[2px] bg-paper"><i className="absolute left-1 top-0.5 h-1 w-1 rounded-full bg-ink/70"/><i className="absolute right-1 top-0.5 h-1 w-1 rounded-full bg-ink/70"/></span></span>mixtape</Link>}
